@@ -77,3 +77,27 @@ def end_game():
                     end_sound.stop()
                     pygame.quit()
                     quit()
+
+def start_game():
+    start_sound.play()
+    while True:
+        game_window.blit(start_bg,(0,0))
+        font = pygame.font.SysFont('times new roman', 50)
+        welcome_surface = font.render('Welcome to Snake Game', True, white)
+        instruction_surface = font.render('Press SPACE to start', True, white)
+        welcome_rect = welcome_surface.get_rect()
+        instruction_rect = instruction_surface.get_rect()
+        welcome_rect.midtop = (window_x / 2, window_y / 4)
+        instruction_rect.midtop = (window_x / 2, window_y / 2)
+        game_window.blit(welcome_surface, welcome_rect)
+        game_window.blit(instruction_surface, instruction_rect)
+        pygame.display.flip()
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    start_sound.stop()
+                    return
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+start_game()
